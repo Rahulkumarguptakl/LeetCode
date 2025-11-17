@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        if (x < 2) return x;  // handle 0 and 1
+
+        long long left = 1, right = x / 2;
+        long long ans = 0;
+
+        while (left <= right) {
+            long long mid = left + (right - left) / 2;
+            long long sq = mid * mid;
+
+            if (sq == x)
+                return mid;  // exact square root
+
+            if (sq < x) {
+                ans = mid;      // store as potential answer
+                left = mid + 1; // search larger numbers
+            } else {
+                right = mid - 1; // search smaller numbers
+            }
+        }
+
+        return ans;  // floor(sqrt(x))
+    }
+};
+
+int main() {
+    Solution s;
+    int x;
+    cin >> x;
+
+    cout << s.mySqrt(x) << endl;
+
+    return 0;
+}
